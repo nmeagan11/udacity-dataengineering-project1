@@ -10,7 +10,7 @@ The purpose of this project is to create a Postgres database with tables designe
 
 The directory of JSON logs is split up into two subdirectories: <code>song_data</code> and <code>log_data</code>. <code>song_data</code> contains metadata about a song and the artist of that song. <code>log_data</code> contain activity logs based on the songs in <code>song_data</code>. In order to optimize for queries on song play analysis, I have created a star schema based on the song and log datasets. The star schema will have a fact table (<code>songplays</code>) and dimension tables (<code>users, songs, artists, time</code>). The structure of this database is outlined below (**note:** rows highlighted in red are primary keys):
 
-![Database Schema](UdacityDataEngProjDBSchema.png)
+![image](UdacityDataEngProj1DBSchema.png)
 
 The tables you see in the diagram above are:
 
