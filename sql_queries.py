@@ -8,12 +8,15 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
 
+# UPDATE UPON REVIEW: adding NOT NULL constraint
+# decided to add NOT NULL constraint on songplay_id, start_time, user_id, session_id
+
 songplay_table_create = ("""
-    CREATE TABLE IF NOT EXISTS songplays (songplay_id SERIAL PRIMARY KEY, start_time timestamp, user_id int, level varchar, song_id varchar, artist_id varchar, session_id int, location varchar, user_agent varchar);
+    CREATE TABLE IF NOT EXISTS songplays (songplay_id SERIAL PRIMARY KEY NOT NULL, start_time timestamp NOT NULL, user_id int NOT NULL, level varchar, song_id varchar, artist_id varchar, session_id int NOT NULL, location varchar, user_agent varchar);
 """)
 
 user_table_create = ("""
-    CREATE TABLE IF NOT EXISTS users (user_id int PRIMARY KEY, first_name varchar, last_name varchar, gender varchar, level varchar);
+    CREATE TABLE IF NOT EXISTS users (user_id int PRIMARY KEY NOT NULL, first_name varchar, last_name varchar, gender varchar, level varchar);
 """)
 
 song_table_create = ("""
@@ -25,7 +28,7 @@ artist_table_create = ("""
 """)
 
 time_table_create = ("""
-    CREATE TABLE IF NOT EXISTS time (start_time timestamp, hour int, day int, week int, month int, year int, weekday int);
+    CREATE TABLE IF NOT EXISTS time (start_time timestamp NOT NULL, hour int, day int, week int, month int, year int, weekday int);
 """)
 
 # INSERT RECORDS

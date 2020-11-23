@@ -4,8 +4,19 @@ import psycopg2
 import pandas as pd
 from sql_queries import *
 
+# UPDATE UPON REVIEW: adding docstring to each function
 
 def process_song_file(cur, filepath):
+    '''
+    Processes a song file in the song_data directory and stores the data in the songs and artists tables.
+
+            Parameters:
+                    cur (cursor): cursor connection to the postgres DB
+                    filepath (string): file path to song_data directory 
+
+            Returns:
+                    None.
+    '''
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -21,6 +32,16 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    '''
+    Processes a log file in the log_data directory and stores the data in the time, users, and songplays tables.
+
+            Parameters:
+                    cur (cursor): cursor connection to the postgres DB
+                    filepath (string): file path to log_data directory 
+
+            Returns:
+                    None.
+    '''
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -64,6 +85,18 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    '''
+    Processes all data and stores the data into the database. 
+
+            Parameters:
+                    cur (cursor): cursor connection to the postgres DB
+                    conn (object): postgres connection object
+                    filepath (string): file path to data directory (data/song_data or data/log_data)
+                    func (function): function to execute (process_song_file or process_log_file)
+                    
+            Returns:
+                    None, but does print the number of files found in each directory, and iteratively the number of files processed.
+    '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -83,6 +116,15 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    '''
+    Main function of this script. Runs the ETL pipeline logic when script is executed.
+
+            Parameters:
+                    None.
+
+            Returns:
+                    None.
+    '''
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
